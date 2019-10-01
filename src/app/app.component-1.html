@@ -1,0 +1,33 @@
+<div>
+        <mat-sidenav-container>
+            
+                    
+            <mat-sidenav #sidenav mode="over" (click)="sidenav.close()">
+                <mat-list>
+                    <mat-list-item *ngFor="let p of perm[role];">
+                        <a mat-button [routerLink]="p.link">{{ p.label }}</a>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Admin</mat-list-item>
+                </mat-list>
+            </mat-sidenav>
+            <mat-sidenav-content style="height:100vh">
+                    <mat-toolbar color="primary">
+                            <mat-toolbar-row>
+                                <button mat-button-flat style="color:white; padding: 0;" *ngIf="role">
+                                        <mat-icon class="example-icon" (click)="sidenav.toggle()">menu</mat-icon>
+                                </button>
+                                <span>Lidl Toolbox</span>
+                                <span class="example-spacer"></span>
+                                <mat-icon class="example-icon" aria-hidden="false" >shopping_cart</mat-icon>        
+                            </mat-toolbar-row>
+                    </mat-toolbar>
+                <div>
+                    <router-outlet></router-outlet>
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+        </div>
+        
+        
+        

@@ -1,0 +1,53 @@
+<form [formGroup]="userForm">
+    <mat-form-field>
+        <mat-label>email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>store number</mat-label>
+        <input matInput formControlName="store">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>role</mat-label>
+        <input matInput formControlName="role">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <div class="form-button">
+        <button mat-raised-button (click)="addUser()">Add</button>
+    </div>
+</form>
+<div>
+    <mat-table  matSort multiTemplateDataRows class="admin-table" [dataSource]="users" class="mat-elevation-z8">
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>email</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="store">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>store</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.store}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>role</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.role}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-icon (click)="deleteUsers()">delete_forever</mat-icon>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let el; let i = dataIndex;">
+                <mat-icon (click)="deleteAddUsers(el)"> {{ el.checked ? 'check_box': 'check_box_outline_blank' }}</mat-icon>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row matRipple (click)="populateForm(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+</div>
+

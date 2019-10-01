@@ -1,0 +1,31 @@
+.centered-disable {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+
+.centered-card {
+    position: fixed;
+    width: 60vw;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.login-input {
+    margin: 10px;
+}
+
+.login-error-text {
+    color: red;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.login-success-text {
+    color: green;
+    margin: 10px;
+}

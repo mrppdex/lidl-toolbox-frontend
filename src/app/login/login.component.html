@@ -1,0 +1,21 @@
+<mat-card class="centered-card">
+    <mat-icon>fingerprint</mat-icon>
+    <form [formGroup]="loginForm">
+        <mat-form-field class="login-input" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="emailErrors?.email && !emailErrors.required">Invalid email</mat-error>
+            <mat-error *ngIf="emailErrors?.required">Email is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field class="login-input" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+            <mat-error *ngIf="passwordErrors?.required">Password is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <div>
+            <button matButton type="submit" (click)="onSubmit()">Login</button>
+        </div>
+    </form>
+</mat-card>
+
+

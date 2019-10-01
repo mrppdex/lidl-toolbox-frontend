@@ -1,0 +1,61 @@
+<form [formGroup]="pluForm">
+    <mat-form-field>
+        <mat-label>Barcode</mat-label>
+        <input #bcIn (click)="bcIn.select()" matInput formControlName="barcode">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>PLU</mat-label>
+        <input #pluIn (click)="bcIn.select()" matInput formControlName="plu">
+        <mat-error *ngIf="pluForm.controls.plu.errors?.required">Don't leave this field empty</mat-error>
+        <mat-error *ngIf="pluForm.controls.plu.errors?.pattern">Digits only</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Product Name</mat-label>
+        <input #pnIn (click)="pnIn.select()" matInput formControlName="name">
+        <mat-error>Don't leave this field empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>URL with the photo</mat-label>
+        <input #urlIn (click)="urlIn.select()" matInput formControlName="url">
+        <mat-hint align="start">optional</mat-hint>
+    </mat-form-field>
+    <div class="form-button">
+        <button mat-raised-button (click)="addPluProduct()" class="action-button">Add</button>
+        <button mat-raised-button (click)="clearForm()" class="action-button">Clear</button>
+    </div>
+</form>
+
+<div>
+    <mat-table  matSort multiTemplateDataRows class="admin-table"  [dataSource]="pluProducts" class="mat-elevation-z8">
+        <ng-container matColumnDef="barcode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>barcode</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.barcode}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="plu">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>plu</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.plu}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>name</mat-header-cell>
+            <mat-cell *matCellDef="let el">{{el.name}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="url">
+            <mat-header-cell *matHeaderCellDef>url</mat-header-cell>
+            <mat-cell *matCellDef="let el">
+                <mat-icon (click)="openDialog(el)">{{ el.url ? 'photo': '' }}</mat-icon>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-icon (click)="deleteProducts()">delete_forever</mat-icon>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let el; let i = dataIndex;">
+                <mat-icon (click)="deleteAddProducts(el)"> {{ el.checked ? 'check_box': 'check_box_outline_blank' }}</mat-icon>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="pluDisplayedColumns"></mat-header-row>
+        <mat-row matRipple (click)="populateForm(row)" *matRowDef="let row; columns: pluDisplayedColumns;"></mat-row>
+    </mat-table>
+
+</div>

@@ -1,0 +1,26 @@
+<form [formGroup]="cdateForm">
+        <div>
+        <mat-button-toggle-group formControlName="cdate">
+          <mat-button-toggle value=0>0d</mat-button-toggle>
+          <mat-button-toggle value=1>1d</mat-button-toggle>
+          <mat-button-toggle value=2 checked="true">2d</mat-button-toggle>
+          <mat-button-toggle value=4>4d</mat-button-toggle>
+          <mat-button-toggle value=6>6d</mat-button-toggle>
+          <mat-button-toggle value=10>10d</mat-button-toggle>
+          <mat-button-toggle value=30>1m</mat-button-toggle>
+        </mat-button-toggle-group>
+        </div>
+        <mat-form-field>
+          <mat-label>BB date</mat-label>
+          <input matInput #dp formControlName="bbdate" [matDatepicker]="datepicker">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #datepicker></mat-datepicker>
+          <mat-error>Enter or pick a date</mat-error>
+        </mat-form-field>
+      </form>
+      <p *ngIf="cdate == 0; else notzero">Don't reduce the price. Write it off at <span style="color:red">COB</span>.</p>
+      
+      <ng-template #notzero>
+        <p *ngIf="dp.value">Reduce the price on <span style="color:red;">{{ discountOnString }} </span>
+        </p></ng-template>
+      

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PermissionsService } from '../permissions.service';
 import { Router } from '@angular/router';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-cdate',
@@ -30,12 +31,13 @@ export class CdateComponent implements OnInit {
   }
 
   get discountOnString() {
-    let mm = this.discountOn.getMonth()+1;
-    let dd = this.discountOn.getDate();
-    return `${dd}/${mm}`
+    const mm = this.discountOn.getMonth() + 1;
+    const  dd = this.discountOn.getDate();
+    return `${dd}/${mm}`;
   }
 
   ngOnInit() {
+    this.dateAdapter.setLocale('ie');
     if (!this.ps.role) {
       this.router.navigate(['/login']);
     }
@@ -48,5 +50,6 @@ export class CdateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ps: PermissionsService,
-    private router: Router ) { }
+    private router: Router,
+    private dateAdapter: DateAdapter<any> ) { }
 }

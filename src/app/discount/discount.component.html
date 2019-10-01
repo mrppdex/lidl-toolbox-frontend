@@ -1,0 +1,19 @@
+<form [formGroup]="discountForm" class="wrapper" style="margin:0;">
+    <mat-form-field appearance="outline">
+        <mat-label>Original Price</mat-label>
+        <input matInput #oprice (click)="oprice.select()" formControlName="price" (keyup)="onChange()">
+        <mat-error>Enter <b>correct</b> price</mat-error>
+    </mat-form-field>
+</form>
+<div>
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+        <mat-button-toggle #b30 value=".3" checked="true" (click)="changeDiscount(b30)">30%</mat-button-toggle>
+        <mat-button-toggle #b50 value=".5" (click)="changeDiscount(b50)">50%</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+
+<mat-form-field appearance="outline" class="wrapper">
+    <mat-label>Reduced Price</mat-label>
+    <input matInput [value]="reducedPrice" disabled>
+</mat-form-field>
+
